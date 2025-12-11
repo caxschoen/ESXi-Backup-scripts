@@ -17,7 +17,7 @@ SOURCE="/vmfs/volumes/SSD960/HAOS_OVA"
 BACKUPBASE="/vmfs/volumes/HD1500BUP/BUP_HAOS"
 BACKUP_HOW="HOT"              # HOT/COLD
 MAXKEEP=2                     # Anzahl Verzeichnisse die behalten werden = MAXKEEP +1
-COMPRESSION="Z"               # Cpmpression mode: G=gzip, Z=zstd, N=no
+COMPRESSION="Z"               # Compression mode: G=gzip, Z=zstd, N=no
 
 If use zstd install zstd in /bin first
 
