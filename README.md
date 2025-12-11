@@ -1,13 +1,13 @@
-ESXi 6.7 hot/cold backup – with backup mode support
-Features: check available storage, clean up snapshots, optional compression (gzip, zstd), 
+ESXi 6.7 hot/cold backup mode, supported features: 
+check available storage, clean up snapshots, optional compression (gzip, zstd), 
 SMART report, storage usage report, 
 configuration via .conf file in the same directory with input parameters
-Email message via SMTP (NetCat) via relay server, email parameters below 
+email message via SMTP (NetCat) via relay server, email parameters below 
 Version: 0.16 from 9 December 2025, file: vmbup.sh
 
 Installation:
 Copy vmbup.sh in new directory (eg /scripts) on local backup disk
-make executable
+make executable > chmod +x vmbup.sh
 Create VM-Backup config files e.g. HAOS_01.conf
 and configure paramters:
 
@@ -33,6 +33,20 @@ Attention:
 cron file changes are not persistent - after VM-reboot lost 
 => special solution
 
+How do you make cron jobs persistent?
+The official VMware method:
+1. Save crontab on a datastore:
+/vmfs/volumes/HD1500BUP/cron/root
+2. Edit local.sh:
+vi /etc/rc.local.d/local.sh
+Add before exit 0:
+# Restore cron after reboot
+cp /vmfs/volumes/HD1500BUP/cron/root /var/spool/cron/crontabs/root
+chmod 600 /var/spool/cron/crontabs/root
+touch /var/spool/cron/crontabs/root
+3. Make the file executable:
+chmod +x /etc/rc.local.d/local.sh
+This will restore the cron jobs during boot.
 
 
 
